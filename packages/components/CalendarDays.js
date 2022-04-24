@@ -1,7 +1,11 @@
-export default function CalendarDays() {
-  const days = 30;
-  const daysArray = Array.from({ length: days }, (v, i) => i + 1);
+import { useState, useEffect } from "react";
+import { useCalendarContext } from "../features/calendarContext";
 
+export default function CalendarDays() {
+  const { displayDate, daysArray, today, daysIds, todayId } =
+    useCalendarContext();
+
+  // Styles
   const calendarDayStyle = {
     width: "100%",
     height: "100%",
@@ -17,12 +21,20 @@ export default function CalendarDays() {
     gridTemplateColumns: "repeat(7,1fr)",
     alignItems: "center",
   };
+  // end of Styles
   return (
     <div className='calendar-days-container' style={calendarDaysContainerStyle}>
-      {daysArray.map((i) => {
+      {daysIds.map((id, i) => {
         return (
-          <div key={i} className='calendar-day' style={calendarDayStyle}>
-            {i}
+          <div
+            key={id}
+            className='calendar-today'
+            style={{
+              ...calendarDayStyle,
+              backgroundColor: todayId === id && "blue",
+            }}
+          >
+            {i + 1}
           </div>
         );
       })}

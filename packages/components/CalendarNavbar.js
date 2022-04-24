@@ -1,6 +1,10 @@
 import { FaAngleRight, FaAngleLeft, FaPlus } from "react-icons/fa";
+import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
+import { useCalendarContext } from "../features/calendarContext";
 
 export default function CalendarNavbar() {
+  const { subtractDisplayDate, monthString, year, addDisplayDate } =
+    useCalendarContext();
   const calendarNavbarStyle = {
     display: "grid",
     gridTemplateRows: "1fr 1fr",
@@ -8,14 +12,7 @@ export default function CalendarNavbar() {
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   };
-  const weekDayStyle = {
-    paddingBottom: "3px",
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    alignItems: "end",
-    textAlign: "center",
-  };
+
   const buttonStyle = {
     border: "none",
     padding: "0",
@@ -25,12 +22,7 @@ export default function CalendarNavbar() {
     marginRight: "0.25rem",
     fontSize: "1.4rem",
   };
-  const calendarNavbarWeekDaysStyle = {
-    justifyItems: "center",
-    display: "grid",
-    gridTemplateColumns: "repeat(7,1fr)",
-    alignItems: "end",
-  };
+
   return (
     <div className='calendar-navbar-container' style={calendarNavbarStyle}>
       <div
@@ -49,7 +41,7 @@ export default function CalendarNavbar() {
             fontWeight: "600",
           }}
         >
-          Abril
+          {monthString} {year}
         </div>
         <div className='calendar-add-control' style={{ justifySelf: "end" }}>
           <button style={buttonStyle}>
@@ -63,26 +55,15 @@ export default function CalendarNavbar() {
             paddingRight: "1rem",
           }}
         >
-          <button style={buttonStyle}>
+          <button style={buttonStyle} onClick={() => subtractDisplayDate()}>
             <FaAngleLeft />
           </button>
-          <button style={buttonStyle}>
+          <button style={buttonStyle} onClick={() => addDisplayDate()}>
             <FaAngleRight />
           </button>
         </div>
       </div>
-      <div
-        className='calendar-navbar-weekDays'
-        style={calendarNavbarWeekDaysStyle}
-      >
-        <div style={weekDayStyle}>D</div>
-        <div style={weekDayStyle}>S</div>
-        <div style={weekDayStyle}>T</div>
-        <div style={weekDayStyle}>Q</div>
-        <div style={weekDayStyle}>Q</div>
-        <div style={weekDayStyle}>S</div>
-        <div style={weekDayStyle}>S</div>
-      </div>
+      <CalendarNavbarWeekDays />
     </div>
   );
 }

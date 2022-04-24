@@ -1,4 +1,5 @@
 import Calendar from "./Calendar";
+import { CalendarContextProvider } from "../features/calendarContext";
 
 export default function CalendarSection() {
   return (
@@ -14,7 +15,9 @@ export default function CalendarSection() {
             justifyContent: "center",
           }}
         >
-          <Calendar />
+          <CalendarContextProvider>
+            <Calendar />
+          </CalendarContextProvider>
         </div>
       </div>
     </main>
