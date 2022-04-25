@@ -18,12 +18,12 @@ export default function CalendarNavbarWeekDays() {
       className='calendar-navbar-weekDays'
       style={calendarNavbarWeekDaysStyle}
     >
-      <div style={weekDayStyle}>D</div>
       <div style={weekDayStyle}>S</div>
+      <div style={weekDayStyle}>M</div>
       <div style={weekDayStyle}>T</div>
-      <div style={weekDayStyle}>Q</div>
-      <div style={weekDayStyle}>Q</div>
-      <div style={weekDayStyle}>S</div>
+      <div style={weekDayStyle}>W</div>
+      <div style={weekDayStyle}>T</div>
+      <div style={weekDayStyle}>F</div>
       <div style={weekDayStyle}>S</div>
     </div>
   );

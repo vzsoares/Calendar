@@ -3,8 +3,7 @@ import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
 import { useCalendarContext } from "../features/calendarContext";
 
 export default function CalendarNavbar() {
-  const { subtractDisplayDate, monthString, year, addDisplayDate } =
-    useCalendarContext();
+  const { jumpPrevMonth, jumpNextMonth, displayDate } = useCalendarContext();
   const calendarNavbarStyle = {
     display: "grid",
     gridTemplateRows: "1fr 1fr",
@@ -34,14 +33,14 @@ export default function CalendarNavbar() {
         }}
       >
         <div
-          className='calendar-month'
+          className='calendar-displayedMonth'
           style={{
             justifySelf: "center",
             fontSize: "1.15rem",
             fontWeight: "600",
           }}
         >
-          {monthString} {year}
+          {displayDate.toDateString().slice(4, 7)} {displayDate.getFullYear()}
         </div>
         <div className='calendar-add-control' style={{ justifySelf: "end" }}>
           <button style={buttonStyle}>
@@ -49,16 +48,16 @@ export default function CalendarNavbar() {
           </button>
         </div>
         <div
-          className='calendar-month-controls'
+          className='calendar-displayedMonth-controls'
           style={{
             justifySelf: "end",
             paddingRight: "1rem",
           }}
         >
-          <button style={buttonStyle} onClick={() => subtractDisplayDate()}>
+          <button style={buttonStyle} onClick={() => jumpPrevMonth()}>
             <FaAngleLeft />
           </button>
-          <button style={buttonStyle} onClick={() => addDisplayDate()}>
+          <button style={buttonStyle} onClick={() => jumpNextMonth()}>
             <FaAngleRight />
           </button>
         </div>

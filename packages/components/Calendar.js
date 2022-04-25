@@ -4,7 +4,7 @@ import CalendarDays from "./CalendarDays";
 export default function Calendar() {
   const calendarContainerStyle = {
     minWidth: "200px",
-    minHeight: "300px",
+    minHeight: "400px",
     display: "grid",
     gridTemplateRows: "1fr 3fr",
     backgroundColor: "#6D7074",

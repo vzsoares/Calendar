@@ -3,59 +3,78 @@ import { createContext, useContext, useMemo, useState } from "react";
 const calendarContext = createContext();
 
 function CalendarContextProvider({ children }) {
-  // const's
+  // constants
+
   const [currentDate] = useState(new Date());
   const [displayDate, setDisplayDate] = useState(currentDate);
-  const today = currentDate.getDate();
-  const month = displayDate.getMonth() + 1;
-  const year = displayDate.getFullYear();
-  const daysInAMonth = getDaysInAMonth(year, month);
-  const daysArray = Array.from({ length: daysInAMonth }, (v, i) => i + 1);
-  const daysIds = daysArray.map((d) => getDayId(year, month, d));
-  const dayString = displayDate.toDateString().slice(0, 3);
-  const monthString = displayDate.toDateString().slice(4, 7);
-  const todayId = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
-    today
-  ).valueOf();
+  const [todayId] = useState(
+    new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate()
+    ).valueOf()
+  );
+  const displayedMonth = displayDate.getMonth() + 1;
+  const displayedYear = displayDate.getFullYear();
+  const daysIds = getDaysIds(displayedYear, displayedMonth);
+  const [events, setEvents] = useState({
+    [todayId]: [{ event: "Today", description: "", color: "blue" }],
+  });
+  // functions
 
-  // logic
-
-  function getDaysInAMonth(year, month) {
-    return new Date(year, month, 0).getDate();
-  }
   function getDayId(year, month, day) {
     return new Date(year, month, day).valueOf();
   }
 
-  function subtractDisplayDate() {
-    if (month - 1 < 1) {
-      setDisplayDate(new Date(year - 1, 12, 0));
-    }
-    setDisplayDate(new Date(year, month - 1, 0));
-  }
-  function addDisplayDate() {
-    if (month + 1 > 12) {
-      setDisplayDate(new Date(year + 1, 1, 0));
-    }
-    setDisplayDate(new Date(year, month + 1, 0));
+  function getDaysInAMonth(year, month) {
+    return new Date(year, month, 0).getDate();
   }
 
-  // export data
+  function getDaysIds(year, month) {
+    let ids = [];
+    // add's prev month days
+    if (new Date(year, month - 1, 1).getDay() !== 0) {
+      for (let i = 0; i < new Date(year, month - 1, 1).getDay(); i++) {
+        // splice is just to Sort the array
+        ids.splice(
+          0,
+          0,
+          getDayId(year, month - 2, getDaysInAMonth(year, month - 1) - i)
+        );
+      }
+    }
+    // adds month days
+    for (let index = 1; index < getDaysInAMonth(year, month) + 1; index++) {
+      ids.push(getDayId(year, month - 1, index));
+    }
+    return ids;
+  }
+
+  function jumpPrevMonth() {
+    if (displayedMonth - 1 < 1) {
+      setDisplayDate(new Date(displayedYear - 1, 12, 0));
+    }
+    setDisplayDate(new Date(displayedYear, displayedMonth - 1, 0));
+  }
+
+  function jumpNextMonth() {
+    if (displayedMonth + 1 > 12) {
+      setDisplayDate(new Date(displayedYear + 1, 1, 0));
+    }
+    setDisplayDate(new Date(displayedYear, displayedMonth + 1, 0));
+  }
+
+  // exported data
   const contextData = useMemo(() => {
     return {
       displayDate,
-      daysArray,
-      today,
-      subtractDisplayDate,
-      monthString,
-      year,
-      addDisplayDate,
       daysIds,
       todayId,
+      events,
+      jumpNextMonth,
+      jumpPrevMonth,
     };
-  }, [displayDate, daysArray, today, monthString, year, todayId]);
+  }, [todayId, daysIds, displayDate]);
   return (
     <calendarContext.Provider value={contextData}>
       {children}
