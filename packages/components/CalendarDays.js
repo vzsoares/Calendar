@@ -25,9 +25,6 @@ export default function CalendarDays() {
   return (
     <div className='calendar-days-container' style={calendarDaysContainerStyle}>
       {daysIds.map((id) => {
-        if (events[id]) {
-          events[id].map((e) => console.log(e.event));
-        }
         return (
           <div
             key={id}
