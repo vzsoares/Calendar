@@ -72,7 +72,11 @@ function CalendarContextProvider({ children }) {
 
   function addEvent(event, description, color, dayID) {
     const newEvent = { event: event, description: description, color: color };
-    setEvents({ ...events, [dayID]: newEvent });
+    setEvents({ ...events, [dayID]: [...(events[dayID] ?? ""), newEvent] });
+  }
+
+  function toggleModal() {
+    setModalState(!modalState);
   }
 
   // exported data
@@ -84,6 +88,9 @@ function CalendarContextProvider({ children }) {
       events,
       modalState,
       modalData,
+      toggleModal,
+      addEvent,
+      getDayId,
       jumpNextMonth,
       jumpPrevMonth,
     };

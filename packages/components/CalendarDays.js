@@ -12,7 +12,7 @@ export default function CalendarDays() {
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
     display: "grid",
-    gridTemplateRows: "5fr 2fr",
+    gridTemplateRows: "5fr 4fr",
     alignItems: "end",
   };
   const calendarDaysContainerStyle = {
@@ -46,6 +46,9 @@ export default function CalendarDays() {
                 }}
               >
                 {events[id].map((e, i) => {
+                  if (i > 2) {
+                    return;
+                  }
                   return (
                     <div
                       key={i}

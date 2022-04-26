@@ -4,8 +4,14 @@ import { useCalendarContext } from "../features/calendarContext";
 import Modal from "./Modal";
 
 export default function CalendarNavbar() {
-  const { jumpPrevMonth, jumpNextMonth, displayDate, modalState, modalData } =
-    useCalendarContext();
+  const {
+    jumpPrevMonth,
+    jumpNextMonth,
+    displayDate,
+    modalState,
+    modalData,
+    toggleModal,
+  } = useCalendarContext();
   const calendarNavbarStyle = {
     display: "grid",
     gridTemplateRows: "1fr 1fr",
@@ -20,10 +26,8 @@ export default function CalendarNavbar() {
     background: "none",
     color: "#252627",
     cursor: "pointer",
-    marginRight: "0.25rem",
     fontSize: "1.4rem",
   };
-
   return (
     <div className='calendar-navbar-container' style={calendarNavbarStyle}>
       <div
@@ -40,12 +44,13 @@ export default function CalendarNavbar() {
             justifySelf: "center",
             fontSize: "1.15rem",
             fontWeight: "600",
+            paddingLeft: "5px",
           }}
         >
           {displayDate.toDateString().slice(4, 7)} {displayDate.getFullYear()}
         </div>
         <div className='calendar-add-control' style={{ justifySelf: "end" }}>
-          <button style={buttonStyle}>
+          <button style={buttonStyle} onClick={() => toggleModal()}>
             <FaPlus />
           </button>
           {modalState && <Modal data={modalData} />}
