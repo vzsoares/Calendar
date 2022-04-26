@@ -14,12 +14,18 @@ function CalendarContextProvider({ children }) {
       currentDate.getDate()
     ).valueOf()
   );
-  const displayedMonth = displayDate.getMonth() + 1;
-  const displayedYear = displayDate.getFullYear();
-  const daysIds = getDaysIds(displayedYear, displayedMonth);
   const [events, setEvents] = useState({
     [todayId]: [{ event: "Today", description: "", color: "blue" }],
   });
+  const [modalState, setModalState] = useState(true);
+  const [modalData, setModalData] = useState({
+    data: todayId,
+    function: "new",
+  });
+  const displayedYear = displayDate.getFullYear();
+  const displayedMonth = displayDate.getMonth() + 1;
+  const daysIds = getDaysIds(displayedYear, displayedMonth);
+
   // functions
 
   function getDayId(year, month, day) {
@@ -64,6 +70,11 @@ function CalendarContextProvider({ children }) {
     setDisplayDate(new Date(displayedYear, displayedMonth + 1, 0));
   }
 
+  function addEvent(event, description, color, dayID) {
+    const newEvent = { event: event, description: description, color: color };
+    setEvents({ ...events, [dayID]: newEvent });
+  }
+
   // exported data
   const contextData = useMemo(() => {
     return {
@@ -71,6 +82,8 @@ function CalendarContextProvider({ children }) {
       daysIds,
       todayId,
       events,
+      modalState,
+      modalData,
       jumpNextMonth,
       jumpPrevMonth,
     };

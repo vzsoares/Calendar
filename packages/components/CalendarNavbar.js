@@ -1,9 +1,11 @@
 import { FaAngleRight, FaAngleLeft, FaPlus } from "react-icons/fa";
 import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
 import { useCalendarContext } from "../features/calendarContext";
+import Modal from "./Modal";
 
 export default function CalendarNavbar() {
-  const { jumpPrevMonth, jumpNextMonth, displayDate } = useCalendarContext();
+  const { jumpPrevMonth, jumpNextMonth, displayDate, modalState, modalData } =
+    useCalendarContext();
   const calendarNavbarStyle = {
     display: "grid",
     gridTemplateRows: "1fr 1fr",
@@ -46,6 +48,7 @@ export default function CalendarNavbar() {
           <button style={buttonStyle}>
             <FaPlus />
           </button>
+          {modalState && <Modal data={modalData} />}
         </div>
         <div
           className='calendar-displayedMonth-controls'
