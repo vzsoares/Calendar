@@ -11,6 +11,8 @@ export default function CalendarNavbar() {
     modalState,
     modalData,
     toggleModal,
+    setModalData,
+    todayId,
   } = useCalendarContext();
   const calendarNavbarStyle = {
     display: "grid",
@@ -28,6 +30,13 @@ export default function CalendarNavbar() {
     cursor: "pointer",
     fontSize: "1.4rem",
   };
+  function handlePlusClick() {
+    setModalData({
+      data: todayId,
+      function: "new",
+    });
+    toggleModal();
+  }
   return (
     <div className='calendar-navbar-container' style={calendarNavbarStyle}>
       <div
@@ -50,10 +59,10 @@ export default function CalendarNavbar() {
           {displayDate.toDateString().slice(4, 7)} {displayDate.getFullYear()}
         </div>
         <div className='calendar-add-control' style={{ justifySelf: "end" }}>
-          <button style={buttonStyle} onClick={() => toggleModal()}>
+          <button style={buttonStyle} onClick={() => handlePlusClick()}>
             <FaPlus />
           </button>
-          {modalState && <Modal data={modalData} />}
+          {modalState && <Modal />}
         </div>
         <div
           className='calendar-displayedMonth-controls'

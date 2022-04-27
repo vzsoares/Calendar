@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useCalendarContext } from "../features/calendarContext";
 
 export default function CalendarDays() {
-  const { daysIds, todayId, displayDate, events } = useCalendarContext();
+  const { daysIds, todayId, displayDate, events, setModalData, setModalState } =
+    useCalendarContext();
 
   // Styles
   const calendarDayStyle = {
@@ -11,6 +12,7 @@ export default function CalendarDays() {
     textAlign: "center",
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
     display: "grid",
     gridTemplateRows: "5fr 4fr",
     alignItems: "end",
@@ -22,12 +24,20 @@ export default function CalendarDays() {
     alignItems: "center",
   };
   // end of Styles
+  function handleClick(id) {
+    setModalData({
+      data: id,
+      function: "view",
+    });
+    setModalState(true);
+  }
   return (
     <div className='calendar-days-container' style={calendarDaysContainerStyle}>
       {daysIds.map((id) => {
         return (
           <div
             key={id}
+            onClick={() => handleClick(id)}
             className='calendar-today'
             style={{
               ...calendarDayStyle,

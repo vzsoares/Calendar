@@ -17,10 +17,10 @@ function CalendarContextProvider({ children }) {
   const [events, setEvents] = useState({
     [todayId]: [{ event: "Today", description: "", color: "blue" }],
   });
-  const [modalState, setModalState] = useState(true);
+  const [modalState, setModalState] = useState(false);
   const [modalData, setModalData] = useState({
     data: todayId,
-    function: "new",
+    function: "view",
   });
   const displayedYear = displayDate.getFullYear();
   const displayedMonth = displayDate.getMonth() + 1;
@@ -79,6 +79,20 @@ function CalendarContextProvider({ children }) {
     setModalState(!modalState);
   }
 
+  function editEvent(id, i, event, description, color) {
+    const editedEvent = {
+      event: event,
+      description: description,
+      color: color,
+    };
+    const myList = [...(events[id] ?? "")];
+    myList[i] = editedEvent;
+    setEvents({
+      ...events,
+      [id]: myList,
+    });
+  }
+
   // exported data
   const contextData = useMemo(() => {
     return {
@@ -88,7 +102,10 @@ function CalendarContextProvider({ children }) {
       events,
       modalState,
       modalData,
+      setModalData,
+      setModalState,
       toggleModal,
+      editEvent,
       addEvent,
       getDayId,
       jumpNextMonth,
