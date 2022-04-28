@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes, FaSquareFull } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { useCalendarContext } from "../features/calendarContext";
 import {
   modalContainerStyle,
@@ -8,15 +8,8 @@ import {
 } from "../features/calendarStyles";
 
 export default function Modal() {
-  const {
-    toggleModal,
-    addEvent,
-    getDayId,
-    events,
-    setModalData,
-    modalData,
-    editEvent,
-  } = useCalendarContext();
+  const { toggleModal, addEvent, events, setModalData, modalData, editEvent } =
+    useCalendarContext();
 
   const [date, setDate] = useState(new Date(modalData.data));
   const [inputDate, setInputDate] = useState("");
@@ -25,21 +18,12 @@ export default function Modal() {
   const [title, setTitle] = useState("");
 
   // logic
-  useEffect(() => {
-    setInputDate(
-      `${date.getFullYear()}-${
-        date.getMonth() + 1 < 10
-          ? `0${date.getMonth() + 1}`
-          : date.getMonth() + 1
-      }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
-    );
-  }, [date]);
 
   function getDateFromInput() {
-    let ano = inputDate.slice(0, 4);
-    let mes = inputDate.slice(5, 7);
-    let dia = inputDate.slice(8, 10);
-    return new Date(ano, Number(mes) - 1, Number(dia));
+    let year = inputDate.slice(0, 4);
+    let month = inputDate.slice(5, 7);
+    let day = inputDate.slice(8, 10);
+    return new Date(year, Number(month) - 1, Number(day));
   }
 
   function handleEditEvent(i) {
@@ -55,6 +39,8 @@ export default function Modal() {
   }
 
   function handleAddBtn() {
+    setTitle("");
+    setDescription("");
     setDate(new Date(modalData.data));
     setModalData({
       data: modalData.data,
@@ -62,12 +48,23 @@ export default function Modal() {
     });
   }
 
+  useEffect(() => {
+    setInputDate(
+      `${date.getFullYear()}-${
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : date.getMonth() + 1
+      }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+    );
+  }, [date]);
+
   return (
     <main style={modalContainerStyle}>
       <a style={modalCloseBtnStyle} onClick={() => toggleModal()}>
         <FaTimes />
       </a>
       <div className='day-data'>
+        {/* render date input or plain date*/}
         {modalData.function === "new" ? (
           <div className='date-input'>
             <input
@@ -86,6 +83,7 @@ export default function Modal() {
           new Date(modalData.data).toDateString()
         )}
       </div>
+      {/* renders view page or add/edit page */}
       {modalData.function === "view" ? (
         <div
           className='events-container'
@@ -99,6 +97,7 @@ export default function Modal() {
           }}
         >
           <div className='events' style={{ width: "100%" }}>
+            {/* render day events or no events msg */}
             {events[modalData.data] ? (
               events[modalData.data].map((e, i) => {
                 return (
@@ -239,6 +238,7 @@ export default function Modal() {
           <div className='btn-container' style={{ justifySelf: "center" }}>
             <button
               onClick={() =>
+                // add or edit event
                 modalData.function !== "edit"
                   ? addEvent(
                       title,
@@ -261,7 +261,7 @@ export default function Modal() {
                 cursor: "pointer",
               }}
             >
-              {modalData.function === "edit" ? "Edit Task" : "Add Task"}
+              {modalData.function === "edit" ? "Edit Event" : "Add Event"}
             </button>
           </div>
         </div>

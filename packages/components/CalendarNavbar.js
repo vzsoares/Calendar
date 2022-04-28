@@ -12,7 +12,6 @@ export default function CalendarNavbar() {
     jumpNextMonth,
     displayDate,
     modalState,
-    modalData,
     toggleModal,
     setModalData,
     todayId,
@@ -50,6 +49,7 @@ export default function CalendarNavbar() {
           <button style={controlButtonStyle} onClick={() => handlePlusClick()}>
             <FaPlus />
           </button>
+          {/* renders modal if true */}
           {modalState && <Modal />}
         </div>
         <div
