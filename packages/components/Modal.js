@@ -90,13 +90,14 @@ export default function Modal() {
           style={{
             height: "100%",
             width: "100%",
-            display: "grid",
             gridTemplateRows: "5fr 50px ",
-            maxHeight: "300px",
-            overflow: "auto",
+            display: "grid",
           }}
         >
-          <div className='events' style={{ width: "100%" }}>
+          <div
+            className='events'
+            style={{ width: "100%", maxHeight: "300px", overflow: "auto" }}
+          >
             {/* render day events or no events msg */}
             {events[modalData.data] ? (
               events[modalData.data].map((e, i) => {
@@ -117,7 +118,7 @@ export default function Modal() {
                       </span>
                       <span>{e.event}</span>
                     </div>
-                    <div className='bottom' style={{ width: "300px" }}>
+                    <div className='bottom' style={{ maxWidth: "184px" }}>
                       <h1
                         style={{
                           fontSize: "0.8rem",
@@ -139,19 +140,32 @@ export default function Modal() {
               <div className='no-events'>{"No events for this day"}</div>
             )}
           </div>
-          <button
+          <div
+            className='button-container'
             style={{
-              backgroundColor: "#595B5F",
-              border: "none",
-              padding: "none",
-              cursor: "pointer",
-              height: "50%",
               alignSelf: "end",
+              display: "flex",
+              justifyContent: "center",
+              height: "100%",
+              alignItems: "flex-end",
+              width: "100%",
             }}
-            onClick={() => handleAddBtn()}
           >
-            Add Event
-          </button>
+            <button
+              style={{
+                backgroundColor: "#595B5F",
+                border: "none",
+                padding: "none",
+                cursor: "pointer",
+                height: "50%",
+                maxWidth: "200px",
+                width: "80%",
+              }}
+              onClick={() => handleAddBtn()}
+            >
+              Add Event
+            </button>
+          </div>
         </div>
       ) : (
         <div
@@ -235,7 +249,17 @@ export default function Modal() {
               </div>
             }
           </div>
-          <div className='btn-container' style={{ justifySelf: "center" }}>
+          <div
+            className='btn-container'
+            style={{
+              justifySelf: "center",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <button
               onClick={() =>
                 // add or edit event
@@ -259,6 +283,8 @@ export default function Modal() {
                 border: "none",
                 padding: "none",
                 cursor: "pointer",
+                minWidth: "100px",
+                height: "25px",
               }}
             >
               {modalData.function === "edit" ? "Edit Event" : "Add Event"}

@@ -11,8 +11,8 @@ export default function CalendarSection() {
         height: "100vh",
         margin: "0 auto",
         display: "flex",
-        flexDirection: "column",
         justifyContent: "space-evenly",
+        flexDirection: "column",
       }}
     >
       <div style={{ maxWidth: "90vw", margin: "0 auto" }}>
