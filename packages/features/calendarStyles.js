@@ -8,8 +8,11 @@ export const colors = {
 };
 
 export const calendarContainerStyle = {
-  minWidth: "200px",
+  margin: "0 auto",
   minHeight: "400px",
+  maxHeight: "600px",
+  minWidth: "200px",
+  maxWidth: "600px",
   backgroundColor: "#6D7074",
   display: "grid",
   gridTemplateRows: "1fr 3fr",
@@ -18,14 +21,14 @@ export const calendarContainerStyle = {
 };
 
 export const calendarDayStyle = {
-  width: "100%",
-  height: "100%",
   textAlign: "center",
-  boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   cursor: "pointer",
   display: "grid",
   gridTemplateRows: "5fr 4fr",
   alignItems: "end",
+  width: "100%",
+  height: "100%",
+  boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
 };
 
 export const calendarDaysContainerStyle = {

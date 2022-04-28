@@ -48,7 +48,8 @@ export default function CalendarDays() {
                     <div
                       key={i}
                       style={{
-                        width: "40px",
+                        width: "40%",
+                        maxWidth: "40px",
                         height: "3px",
                         background: e.color,
                         margin: "0 auto",

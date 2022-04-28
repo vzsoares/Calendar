@@ -9,13 +9,14 @@ export default function CalendarSection() {
       style={{
         backgroundColor: colors.backgroundBlack,
         height: "100vh",
-        margin: "0 auto",
+        width: "100vw",
         display: "flex",
         justifyContent: "space-evenly",
         flexDirection: "column",
+        alignItems: "center",
       }}
     >
-      <div style={{ maxWidth: "90vw", margin: "0 auto" }}>
+      <div style={{ maxWidth: "90vw", width: "100%" }}>
         <div style={{}}>
           <CalendarContextProvider>
             <Calendar />
