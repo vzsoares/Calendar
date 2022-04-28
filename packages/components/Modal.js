@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes, FaSquareFull } from "react-icons/fa";
 import { useCalendarContext } from "../features/calendarContext";
+import {
+  modalContainerStyle,
+  modalCloseBtnStyle,
+  colors,
+} from "../features/calendarStyles";
+
 export default function Modal() {
   const {
     toggleModal,
@@ -11,11 +17,14 @@ export default function Modal() {
     modalData,
     editEvent,
   } = useCalendarContext();
+
   const [date, setDate] = useState(new Date(modalData.data));
   const [inputDate, setInputDate] = useState("");
-  const [color, setColor] = useState("red");
+  const [color, setColor] = useState(colors.taskRed);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
+
+  // logic
   useEffect(() => {
     setInputDate(
       `${date.getFullYear()}-${
@@ -25,13 +34,14 @@ export default function Modal() {
       }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
     );
   }, [date]);
-  // logic
+
   function getDateFromInput() {
     let ano = inputDate.slice(0, 4);
     let mes = inputDate.slice(5, 7);
     let dia = inputDate.slice(8, 10);
     return new Date(ano, Number(mes) - 1, Number(dia));
   }
+
   function handleEditEvent(i) {
     setModalData({
       data: modalData.data,
@@ -43,6 +53,7 @@ export default function Modal() {
     setDescription(events[modalData.data][i].description);
     setColor(events[modalData.data][i].color);
   }
+
   function handleAddBtn() {
     setDate(new Date(modalData.data));
     setModalData({
@@ -52,34 +63,8 @@ export default function Modal() {
   }
 
   return (
-    <main
-      style={{
-        minWidth: "200px",
-        minHeight: "360px",
-        backgroundColor: "#6D7074",
-        position: "fixed",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-        padding: "0.5rem",
-        display: "grid",
-        justifyContent: "center",
-        alignItems: "start",
-        justifyItems: "center",
-        gridTemplateRows: "1fr 5fr",
-      }}
-    >
-      <a
-        style={{
-          position: "absolute",
-          left: "100%",
-          fontSize: "1.5rem",
-          transform: "translate(-110%, 10%)",
-        }}
-        onClick={() => toggleModal()}
-      >
+    <main style={modalContainerStyle}>
+      <a style={modalCloseBtnStyle} onClick={() => toggleModal()}>
         <FaTimes />
       </a>
       <div className='day-data'>
@@ -209,16 +194,25 @@ export default function Modal() {
               }}
               onChange={(e) => setColor(e.target.value)}
             >
-              <option value='red' style={{ color: "red" }}>
+              <option value={colors.taskRed} style={{ color: colors.taskRed }}>
                 ⚫
               </option>
-              <option value='blue' style={{ color: "blue" }}>
+              <option
+                value={colors.taskBlue}
+                style={{ color: colors.taskBlue }}
+              >
                 ⚫
               </option>
-              <option value='green' style={{ color: "green" }}>
+              <option
+                value={colors.taskGreen}
+                style={{ color: colors.taskGreen }}
+              >
                 ⚫
               </option>
-              <option value='yellow' style={{ color: "yellow" }}>
+              <option
+                value={colors.taskYellow}
+                style={{ color: colors.taskYellow }}
+              >
                 ⚫
               </option>
             </select>
@@ -230,7 +224,6 @@ export default function Modal() {
                 <input
                   type='text'
                   value={description}
-                  name='description-input'
                   maxLength='1000'
                   onChange={(e) => setDescription(e.target.value)}
                   style={{
@@ -268,7 +261,7 @@ export default function Modal() {
                 cursor: "pointer",
               }}
             >
-              {modalData.function === "edit" ? "Edit Task" : "Add task"}
+              {modalData.function === "edit" ? "Edit Task" : "Add Task"}
             </button>
           </div>
         </div>

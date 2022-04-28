@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { colors } from "./calendarStyles";
 
 const calendarContext = createContext();
 
@@ -15,7 +16,7 @@ function CalendarContextProvider({ children }) {
     ).valueOf()
   );
   const [events, setEvents] = useState({
-    [todayId]: [{ event: "Today", description: "", color: "blue" }],
+    [todayId]: [{ event: "Today", description: "", color: colors.taskBlue }],
   });
   const [modalState, setModalState] = useState(false);
   const [modalData, setModalData] = useState({

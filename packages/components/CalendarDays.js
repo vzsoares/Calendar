@@ -1,29 +1,14 @@
 import { useState, useEffect } from "react";
 import { useCalendarContext } from "../features/calendarContext";
+import {
+  calendarDayStyle,
+  calendarDaysContainerStyle,
+} from "../features/calendarStyles";
 
 export default function CalendarDays() {
   const { daysIds, todayId, displayDate, events, setModalData, setModalState } =
     useCalendarContext();
 
-  // Styles
-  const calendarDayStyle = {
-    width: "100%",
-    height: "100%",
-    textAlign: "center",
-    boxShadow:
-      "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-    cursor: "pointer",
-    display: "grid",
-    gridTemplateRows: "5fr 4fr",
-    alignItems: "end",
-  };
-  const calendarDaysContainerStyle = {
-    display: "grid",
-    justifyItems: "center",
-    gridTemplateColumns: "repeat(7,1fr)",
-    alignItems: "center",
-  };
-  // end of Styles
   function handleClick(id) {
     setModalData({
       data: id,

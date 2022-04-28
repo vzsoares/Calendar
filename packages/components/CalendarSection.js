@@ -1,9 +1,10 @@
 import Calendar from "./Calendar";
 import { CalendarContextProvider } from "../features/calendarContext";
+import { colors } from "../features/calendarStyles";
 
 export default function CalendarSection() {
   return (
-    <main style={{ backgroundColor: "#252627" }}>
+    <main style={{ backgroundColor: colors.backgroundBlack }}>
       <div style={{ maxWidth: "90vw", margin: "0 auto" }}>
         <div
           style={{

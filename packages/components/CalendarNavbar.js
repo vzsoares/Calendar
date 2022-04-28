@@ -2,7 +2,10 @@ import { FaAngleRight, FaAngleLeft, FaPlus } from "react-icons/fa";
 import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
 import { useCalendarContext } from "../features/calendarContext";
 import Modal from "./Modal";
-
+import {
+  calendarNavbarStyle,
+  controlButtonStyle,
+} from "../features/calendarStyles";
 export default function CalendarNavbar() {
   const {
     jumpPrevMonth,
@@ -14,22 +17,7 @@ export default function CalendarNavbar() {
     setModalData,
     todayId,
   } = useCalendarContext();
-  const calendarNavbarStyle = {
-    display: "grid",
-    gridTemplateRows: "1fr 1fr",
-    backgroundColor: "#595B5F",
-    boxShadow:
-      "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-  };
 
-  const buttonStyle = {
-    border: "none",
-    padding: "0",
-    background: "none",
-    color: "#252627",
-    cursor: "pointer",
-    fontSize: "1.4rem",
-  };
   function handlePlusClick() {
     setModalData({
       data: todayId,
@@ -59,7 +47,7 @@ export default function CalendarNavbar() {
           {displayDate.toDateString().slice(4, 7)} {displayDate.getFullYear()}
         </div>
         <div className='calendar-add-control' style={{ justifySelf: "end" }}>
-          <button style={buttonStyle} onClick={() => handlePlusClick()}>
+          <button style={controlButtonStyle} onClick={() => handlePlusClick()}>
             <FaPlus />
           </button>
           {modalState && <Modal />}
@@ -71,10 +59,10 @@ export default function CalendarNavbar() {
             paddingRight: "1rem",
           }}
         >
-          <button style={buttonStyle} onClick={() => jumpPrevMonth()}>
+          <button style={controlButtonStyle} onClick={() => jumpPrevMonth()}>
             <FaAngleLeft />
           </button>
-          <button style={buttonStyle} onClick={() => jumpNextMonth()}>
+          <button style={controlButtonStyle} onClick={() => jumpNextMonth()}>
             <FaAngleRight />
           </button>
         </div>
