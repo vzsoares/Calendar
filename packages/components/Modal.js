@@ -8,8 +8,15 @@ import {
 } from "../features/calendarStyles";
 
 export default function Modal() {
-  const { toggleModal, addEvent, events, setModalData, modalData, editEvent } =
-    useCalendarContext();
+  const {
+    toggleModal,
+    addEvent,
+    events,
+    setModalData,
+    modalData,
+    editEvent,
+    removeEvent,
+  } = useCalendarContext();
 
   const [date, setDate] = useState(new Date(modalData.data));
   const [inputDate, setInputDate] = useState("");
@@ -132,6 +139,21 @@ export default function Modal() {
                       >
                         {e.description ? e.description : "no description added"}
                       </h1>
+                      <button
+                        style={{
+                          backgroundColor: "#595B5F",
+                          border: "none",
+                          padding: "none",
+                          cursor: "pointer",
+                          minWidth: "60px",
+                          height: "20px",
+                        }}
+                        onClick={() =>
+                          removeEvent(modalData.data, i) & toggleModal()
+                        }
+                      >
+                        Delete
+                      </button>
                     </div>
                   </a>
                 );

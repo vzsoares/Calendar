@@ -76,6 +76,19 @@ function CalendarContextProvider({ children }) {
     setEvents({ ...events, [dayID]: [...(events[dayID] ?? ""), newEvent] });
   }
 
+  function removeEvent(id, i) {
+    if (events[id].length <= 1) {
+      const dummyEvents = { ...events };
+      delete dummyEvents[id];
+      setEvents(dummyEvents);
+      return;
+    }
+    setEvents({
+      ...events,
+      [id]: [...events[id].filter((element, index) => index !== i)],
+    });
+  }
+
   function toggleModal() {
     setModalState(!modalState);
   }
@@ -108,6 +121,7 @@ function CalendarContextProvider({ children }) {
       toggleModal,
       editEvent,
       addEvent,
+      removeEvent,
       getDayId,
       jumpNextMonth,
       jumpPrevMonth,
