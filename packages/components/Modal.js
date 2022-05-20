@@ -119,11 +119,26 @@ export default function Modal() {
                     }}
                     onClick={() => handleEditEvent(i)}
                   >
-                    <div className='top'>
+                    <div
+                      className='top'
+                      style={{ maxWidth: "184px", display: "flex" }}
+                    >
                       <span style={{ color: e.color, marginRight: "5px" }}>
                         ⚫
                       </span>
-                      <span>{e.event}</span>
+                      <h1
+                        style={{
+                          fontSize: "1rem",
+                          margin: "0",
+                          padding: "0",
+                          fontWeight: "600",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {e.event}
+                      </h1>
                     </div>
                     <div className='bottom' style={{ maxWidth: "184px" }}>
                       <h1
