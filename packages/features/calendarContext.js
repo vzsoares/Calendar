@@ -1,11 +1,10 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { colors } from "./calendarStyles";
 
 const calendarContext = createContext();
 
 function CalendarContextProvider({ children }) {
-  // constants
-
+  // Constants
   const [currentDate] = useState(new Date());
   const [displayDate, setDisplayDate] = useState(currentDate);
   const [todayId] = useState(
@@ -15,9 +14,11 @@ function CalendarContextProvider({ children }) {
       currentDate.getDate()
     ).valueOf()
   );
-  const [events, setEvents] = useState({
-    [todayId]: [{ event: "Today", description: "", color: colors.taskBlue }],
+  const [todayEvent] = useState({
+    [todayId]: [{ event: "Today", description: "", color: colors.taskToday }],
   });
+  const [events, setEvents] = useState({});
+
   const [modalState, setModalState] = useState(false);
   const [modalData, setModalData] = useState({
     data: todayId,
@@ -27,8 +28,24 @@ function CalendarContextProvider({ children }) {
   const displayedMonth = displayDate.getMonth() + 1;
   const daysIds = getDaysIds(displayedYear, displayedMonth);
 
-  // functions
+  // Effects
+  // get local events
+  useEffect(() => {
+    setEvents(JSON.parse(localStorage.getItem("user-events")) ?? {});
+  }, []);
 
+  // save events
+  useEffect(() => {
+    function saveOnBrowser() {
+      return localStorage.setItem("user-events", JSON.stringify(events));
+    }
+    let timeout = setTimeout(saveOnBrowser, 500);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [events]);
+
+  // Functions
   function getDayId(year, month, day) {
     return new Date(year, month, day).valueOf();
   }
@@ -118,6 +135,7 @@ function CalendarContextProvider({ children }) {
       modalData,
       setModalData,
       setModalState,
+      todayEvent,
       toggleModal,
       editEvent,
       addEvent,

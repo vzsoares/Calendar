@@ -5,6 +5,7 @@ export const colors = {
   taskBlue: "#53D8FB",
   taskYellow: "#FFC800",
   taskGreen: "#8FC93A",
+  taskToday: "#eefbff",
 };
 
 export const calendarContainerStyle = {

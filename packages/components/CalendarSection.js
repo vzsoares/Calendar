@@ -18,6 +18,7 @@ export default function CalendarSection() {
     >
       <div style={{ maxWidth: "90vw", width: "100%" }}>
         <div style={{}}>
+          {/* @ts-ignore */}
           <CalendarContextProvider>
             <Calendar />
           </CalendarContextProvider>
@@ -38,6 +39,7 @@ export default function CalendarSection() {
           className='github'
         >
           <FaGithubSquare
+            // @ts-ignore
             style={{
               color: colors.darkGrey,
               fontSize: "3rem",

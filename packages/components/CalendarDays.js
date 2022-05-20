@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useCalendarContext } from "../features/calendarContext";
 import {
   calendarDayStyle,
@@ -6,8 +5,14 @@ import {
 } from "../features/calendarStyles";
 
 export default function CalendarDays() {
-  const { daysIds, displayDate, events, setModalData, setModalState } =
-    useCalendarContext();
+  const {
+    daysIds,
+    displayDate,
+    events,
+    setModalData,
+    setModalState,
+    todayEvent,
+  } = useCalendarContext();
 
   function handleClick(id) {
     setModalData({
@@ -16,6 +21,10 @@ export default function CalendarDays() {
     });
     setModalState(true);
   }
+
+  // include today to display
+  const displayEvents = { ...events, ...todayEvent };
+
   return (
     <div className='calendar-days-container' style={calendarDaysContainerStyle}>
       {daysIds.map((id) => {
@@ -32,7 +41,7 @@ export default function CalendarDays() {
             }}
           >
             {new Date(id).getDate()}
-            {events[id] && (
+            {displayEvents[id] && (
               <div
                 style={{
                   alignSelf: "start",
@@ -40,7 +49,7 @@ export default function CalendarDays() {
                   height: "100%",
                 }}
               >
-                {events[id].map((e, i) => {
+                {displayEvents[id].map((e, i) => {
                   if (i > 2) {
                     return;
                   }
