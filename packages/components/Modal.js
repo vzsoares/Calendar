@@ -59,110 +59,6 @@ export default function Modal() {
     );
   }, [date]);
 
-  function EditAddSection() {
-    return (
-      <div
-        style={{
-          height: "100%",
-          display: "grid",
-          gridTemplateRows: "1fr 0.5fr 4fr",
-        }}
-      >
-        <TitleInput />
-        <ColorInput />
-        <DescriptionInput />
-      </div>
-    );
-  }
-
-  function TitleInput() {
-    return (
-      <div className='title'>
-        {"Title:"}
-        {
-          <div className='title-input' style={{ display: "grid" }}>
-            <input
-              type='text'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              style={{
-                width: "50%",
-                justifySelf: "start",
-                backgroundColor: "#595B5F",
-                border: "none",
-                padding: "none",
-              }}
-            />
-          </div>
-        }
-      </div>
-    );
-  }
-
-  function ColorInput() {
-    return (
-      <>
-        <div className='color-input' style={{ justifySelf: "start" }}>
-          {"Color: "}
-          <select
-            value={color}
-            style={{
-              backgroundColor: "#595B5F",
-              border: "none",
-              padding: "none",
-              cursor: "pointer",
-              color: color,
-            }}
-            onChange={(e) => setColor(e.target.value)}
-          >
-            <option value={colors.taskRed} style={{ color: colors.taskRed }}>
-              ⚫
-            </option>
-            <option value={colors.taskBlue} style={{ color: colors.taskBlue }}>
-              ⚫
-            </option>
-            <option
-              value={colors.taskGreen}
-              style={{ color: colors.taskGreen }}
-            >
-              ⚫
-            </option>
-            <option
-              value={colors.taskYellow}
-              style={{ color: colors.taskYellow }}
-            >
-              ⚫
-            </option>
-          </select>
-        </div>
-      </>
-    );
-  }
-
-  function DescriptionInput() {
-    return (
-      <div className='content' style={{ height: "100%" }}>
-        {"Description:"}
-        {
-          <div className='description-input' style={{ height: "80%" }}>
-            <input
-              type='text'
-              value={description}
-              maxLength='1000'
-              onChange={(e) => setDescription(e.target.value)}
-              style={{
-                height: "70%",
-                backgroundColor: "#595B5F",
-                border: "none",
-                padding: "none",
-              }}
-            />
-          </div>
-        }
-      </div>
-    );
-  }
-
   function MainBtn() {
     return (
       <div
@@ -210,23 +106,10 @@ export default function Modal() {
       </div>
     );
   }
+
   function MainTitle() {
     if (modalData.function === "new") {
-      return (
-        <div className='date-input'>
-          <input
-            style={{
-              backgroundColor: "#595B5F",
-              border: "none",
-              padding: "none",
-              cursor: "pointer",
-            }}
-            type='date'
-            value={inputDate}
-            onChange={(e) => setInputDate(e.target.value)}
-          />
-        </div>
-      );
+      return <DateInput value={inputDate} setValue={setInputDate} />;
     } else return <div>{new Date(modalData.data).toDateString()} </div>;
   }
   function ViewSection() {
@@ -328,9 +211,143 @@ export default function Modal() {
       <MainTitle />
       {/* renders view page or add/edit page */}
       <div style={{ width: "100%" }}>
-        {modalData.function === "view" ? <ViewSection /> : <EditAddSection />}
+        {modalData.function === "view" ? (
+          <ViewSection />
+        ) : (
+          <EditAddSection
+            props={{
+              title,
+              setTitle,
+              color,
+              setColor,
+              description,
+              setDescription,
+            }}
+          />
+        )}
       </div>
       <MainBtn />
     </main>
+  );
+}
+
+function EditAddSection({
+  props: { title, setTitle, color, setColor, description, setDescription },
+}) {
+  return (
+    <div
+      style={{
+        height: "100%",
+        display: "grid",
+        gridTemplateRows: "1fr 0.5fr 4fr",
+      }}
+    >
+      <TitleInput value={title} setValue={setTitle} />
+      <ColorInput value={color} setValue={setColor} />
+      <DescriptionInput value={description} setValue={setDescription} />
+    </div>
+  );
+}
+
+function DescriptionInput({ value, setValue }) {
+  return (
+    <div className='content' style={{ height: "100%" }}>
+      {"Description:"}
+      {
+        <div className='description-input' style={{ height: "80%" }}>
+          <input
+            type='text'
+            value={value}
+            maxLength='1000'
+            onChange={(e) => setValue(e.target.value)}
+            style={{
+              height: "70%",
+              backgroundColor: "#595B5F",
+              border: "none",
+              padding: "none",
+            }}
+          />
+        </div>
+      }
+    </div>
+  );
+}
+
+function TitleInput({ value, setValue }) {
+  return (
+    <div className='title'>
+      {"Title:"}
+      {
+        <div className='title-input' style={{ display: "grid" }}>
+          <input
+            type='text'
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            style={{
+              width: "50%",
+              justifySelf: "start",
+              backgroundColor: "#595B5F",
+              border: "none",
+              padding: "none",
+            }}
+          />
+        </div>
+      }
+    </div>
+  );
+}
+
+function ColorInput({ value, setValue }) {
+  return (
+    <>
+      <div className='color-input' style={{ justifySelf: "start" }}>
+        {"Color: "}
+        <select
+          value={value}
+          style={{
+            backgroundColor: "#595B5F",
+            border: "none",
+            padding: "none",
+            cursor: "pointer",
+            color: value,
+          }}
+          onChange={(e) => setValue(e.target.value)}
+        >
+          <option value={colors.taskRed} style={{ color: colors.taskRed }}>
+            ⚫
+          </option>
+          <option value={colors.taskBlue} style={{ color: colors.taskBlue }}>
+            ⚫
+          </option>
+          <option value={colors.taskGreen} style={{ color: colors.taskGreen }}>
+            ⚫
+          </option>
+          <option
+            value={colors.taskYellow}
+            style={{ color: colors.taskYellow }}
+          >
+            ⚫
+          </option>
+        </select>
+      </div>
+    </>
+  );
+}
+
+function DateInput({ value, setValue }) {
+  return (
+    <div className='date-input'>
+      <input
+        style={{
+          backgroundColor: "#595B5F",
+          border: "none",
+          padding: "none",
+          cursor: "pointer",
+        }}
+        type='date'
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
   );
 }

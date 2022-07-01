@@ -5,6 +5,7 @@ const modalContext = createContext();
 
 function ModalContextProvider({ children }) {
   const {} = useCalendarContext();
+
   const [modalState, setModalState] = useState(false);
   const [modalData, setModalData] = useState({
     data: "todayId",
@@ -17,7 +18,13 @@ function ModalContextProvider({ children }) {
 
   // exported Data
   const contextData = useMemo(() => {
-    return { modalState, modalData, toggleModal, setModalState, setModalData };
+    return {
+      modalState,
+      modalData,
+      toggleModal,
+      setModalState,
+      setModalData,
+    };
   }, [modalState, modalData]);
   return (
     <modalContext.Provider value={contextData}>
