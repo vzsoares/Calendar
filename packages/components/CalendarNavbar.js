@@ -1,21 +1,15 @@
 import { FaAngleRight, FaAngleLeft, FaPlus } from "react-icons/fa";
 import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
 import { useCalendarContext } from "../features/calendarContext";
-import Modal from "./Modal";
+import { useModalContext } from "../features/ModalContext";
 import {
   calendarNavbarStyle,
   controlButtonStyle,
 } from "../features/calendarStyles";
 export default function CalendarNavbar() {
-  const {
-    jumpPrevMonth,
-    jumpNextMonth,
-    displayDate,
-    modalState,
-    toggleModal,
-    setModalData,
-    todayId,
-  } = useCalendarContext();
+  const { jumpPrevMonth, jumpNextMonth, displayDate, setModalData, todayId } =
+    useCalendarContext();
+  const { toggleModal } = useModalContext();
 
   function handlePlusClick() {
     setModalData({
@@ -49,8 +43,6 @@ export default function CalendarNavbar() {
           <button style={controlButtonStyle} onClick={() => handlePlusClick()}>
             <FaPlus />
           </button>
-          {/* renders modal if true */}
-          {modalState && <Modal />}
         </div>
         <div
           className='calendar-displayedMonth-controls'

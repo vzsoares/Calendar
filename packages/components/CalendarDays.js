@@ -1,18 +1,14 @@
 import { useCalendarContext } from "../features/calendarContext";
+import { useModalContext } from "../features/ModalContext";
 import {
   calendarDayStyle,
   calendarDaysContainerStyle,
 } from "../features/calendarStyles";
 
 export default function CalendarDays() {
-  const {
-    daysIds,
-    displayDate,
-    events,
-    setModalData,
-    setModalState,
-    todayEvent,
-  } = useCalendarContext();
+  const { daysIds, displayDate, events, setModalData, todayEvent } =
+    useCalendarContext();
+  const { setModalState } = useModalContext();
 
   function handleClick(id) {
     setModalData({

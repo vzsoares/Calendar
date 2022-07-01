@@ -19,7 +19,6 @@ function CalendarContextProvider({ children }) {
   });
   const [events, setEvents] = useState({});
 
-  const [modalState, setModalState] = useState(false);
   const [modalData, setModalData] = useState({
     data: todayId,
     function: "view",
@@ -106,10 +105,6 @@ function CalendarContextProvider({ children }) {
     });
   }
 
-  function toggleModal() {
-    setModalState(!modalState);
-  }
-
   function editEvent(id, i, event, description, color) {
     const editedEvent = {
       event: event,
@@ -131,12 +126,9 @@ function CalendarContextProvider({ children }) {
       daysIds,
       todayId,
       events,
-      modalState,
       modalData,
       setModalData,
-      setModalState,
       todayEvent,
-      toggleModal,
       editEvent,
       addEvent,
       removeEvent,

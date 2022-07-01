@@ -1,5 +1,6 @@
 import Calendar from "./Calendar";
 import { CalendarContextProvider } from "../features/calendarContext";
+import { ModalContextProvider } from "../features/ModalContext";
 import { FaGithubSquare } from "react-icons/fa";
 import { colors } from "../features/calendarStyles";
 
@@ -20,7 +21,9 @@ export default function CalendarSection() {
         <div style={{}}>
           {/* @ts-ignore */}
           <CalendarContextProvider>
-            <Calendar />
+            <ModalContextProvider>
+              <Calendar />
+            </ModalContextProvider>
           </CalendarContextProvider>
         </div>
       </div>

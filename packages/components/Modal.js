@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useCalendarContext } from "../features/calendarContext";
+import { useModalContext } from "../features/ModalContext";
 import {
   modalContainerStyle,
   modalCloseBtnStyle,
@@ -8,15 +9,9 @@ import {
 } from "../features/calendarStyles";
 
 export default function Modal() {
-  const {
-    toggleModal,
-    addEvent,
-    events,
-    setModalData,
-    modalData,
-    editEvent,
-    removeEvent,
-  } = useCalendarContext();
+  const { addEvent, events, setModalData, modalData, editEvent, removeEvent } =
+    useCalendarContext();
+  const { toggleModal } = useModalContext();
 
   const [date, setDate] = useState(new Date(modalData.data));
   const [inputDate, setInputDate] = useState("");
