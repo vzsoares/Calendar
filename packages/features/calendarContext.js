@@ -19,10 +19,6 @@ function CalendarContextProvider({ children }) {
   });
   const [events, setEvents] = useState({});
 
-  const [modalData, setModalData] = useState({
-    data: todayId,
-    function: "view",
-  });
   const displayedYear = displayDate.getFullYear();
   const displayedMonth = displayDate.getMonth() + 1;
   const daysIds = getDaysIds(displayedYear, displayedMonth);
@@ -126,8 +122,6 @@ function CalendarContextProvider({ children }) {
       daysIds,
       todayId,
       events,
-      modalData,
-      setModalData,
       todayEvent,
       editEvent,
       addEvent,

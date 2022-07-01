@@ -7,9 +7,9 @@ import {
   controlButtonStyle,
 } from "../features/calendarStyles";
 export default function CalendarNavbar() {
-  const { jumpPrevMonth, jumpNextMonth, displayDate, setModalData, todayId } =
+  const { jumpPrevMonth, jumpNextMonth, displayDate, todayId } =
     useCalendarContext();
-  const { toggleModal } = useModalContext();
+  const { toggleModal, setModalData } = useModalContext();
 
   function handlePlusClick() {
     setModalData({

@@ -6,9 +6,8 @@ import {
 } from "../features/calendarStyles";
 
 export default function CalendarDays() {
-  const { daysIds, displayDate, events, setModalData, todayEvent } =
-    useCalendarContext();
-  const { setModalState } = useModalContext();
+  const { daysIds, displayDate, events, todayEvent } = useCalendarContext();
+  const { setModalState, setModalData } = useModalContext();
 
   function handleClick(id) {
     setModalData({

@@ -56,8 +56,8 @@ export const controlButtonStyle = {
 };
 
 export const modalContainerStyle = {
-  minWidth: "200px",
-  minHeight: "360px",
+  width: "200px",
+  height: "360px",
   backgroundColor: "#6D7074",
   position: "fixed",
   left: "50%",
@@ -67,10 +67,9 @@ export const modalContainerStyle = {
     "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
   padding: "0.5rem",
   display: "grid",
-  justifyContent: "center",
-  alignItems: "start",
+  alignItems: "center",
   justifyItems: "center",
-  gridTemplateRows: "1fr 5fr",
+  gridTemplateRows: "1fr 5fr 1fr",
 };
 
 export const modalCloseBtnStyle = {
@@ -79,4 +78,5 @@ export const modalCloseBtnStyle = {
   fontSize: "1.5rem",
   transform: "translate(-110%, 10%)",
   color: colors.backgroundBlack,
+  alignSelf: "start",
 };
