@@ -60,6 +60,7 @@ export default function Modal() {
   }, [date]);
 
   function MainBtn() {
+    // TODO move away
     return (
       <div
         className='btn-container'
@@ -108,11 +109,14 @@ export default function Modal() {
   }
 
   function MainTitle() {
+    // TODO move away
     if (modalData.function === "new") {
       return <DateInput value={inputDate} setValue={setInputDate} />;
     } else return <div>{new Date(modalData.data).toDateString()} </div>;
   }
+
   function ViewSection() {
+    // TODO move away
     return (
       <div
         className='events-container'
@@ -216,6 +220,7 @@ export default function Modal() {
         ) : (
           <EditAddSection
             props={{
+              // TODO pass props to context
               title,
               setTitle,
               color,
