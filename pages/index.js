@@ -7,7 +7,7 @@ export default function Home() {
     <main
       style={{
         backgroundColor: colors.backgroundBlack,
-        height: "100vh",
+        height: "100vh ",
         width: "100vw",
         display: "flex",
         justifyContent: "space-evenly",

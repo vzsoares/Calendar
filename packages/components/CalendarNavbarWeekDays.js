@@ -7,17 +7,16 @@ export default function CalendarNavbarWeekDays() {
     alignItems: "end",
     textAlign: "center",
   };
+
   const calendarNavbarWeekDaysStyle = {
     justifyItems: "center",
     display: "grid",
     gridTemplateColumns: "repeat(7,1fr)",
     alignItems: "end",
   };
+
   return (
-    <div
-      className='calendar-navbar-weekDays'
-      style={calendarNavbarWeekDaysStyle}
-    >
+    <div style={calendarNavbarWeekDaysStyle}>
       <div style={weekDayStyle}>S</div>
       <div style={weekDayStyle}>M</div>
       <div style={weekDayStyle}>T</div>

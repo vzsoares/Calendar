@@ -11,10 +11,11 @@ export default function ModalButton() {
     color,
     getDateFromInput,
   } = useModalContext();
+
   const { editEvent, addEvent } = useCalendarContext();
+
   return (
     <div
-      className='btn-container'
       style={{
         justifySelf: "center",
         width: "100%",
@@ -37,7 +38,7 @@ export default function ModalButton() {
             : modalData.function === "view"
             ? startAdding()
             : editEvent(
-                modalData.data,
+                modalData.date,
                 modalData.index,
                 title,
                 description,

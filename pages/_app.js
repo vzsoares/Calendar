@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <CalendarContextProvider>
       <ModalContextProvider>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </ModalContextProvider>
     </CalendarContextProvider>
   );
