@@ -7,14 +7,14 @@ import {
 
 export default function CalendarDays() {
   const { daysIds, displayDate, events, todayEvent } = useCalendarContext();
-  const { setModalState, setModalData } = useModalContext();
+  const { setIsModalOpened, setModalData } = useModalContext();
 
   function handleClick(id) {
     setModalData({
-      data: id,
+      date: id,
       function: "view",
     });
-    setModalState(true);
+    setIsModalOpened(true);
   }
 
   // include today to display
