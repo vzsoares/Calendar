@@ -1,5 +1,7 @@
 # Calendar Project
 
+<!-- TODO review readme -->
+
 <p align="center">
 <a href='https://calendar-roan.vercel.app/' target="_blank">
 Live Demo
