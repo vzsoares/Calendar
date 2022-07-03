@@ -5,13 +5,13 @@ import { useModalContext } from "../features/ModalContext";
 import { calendarContainerStyle } from "../features/calendarStyles";
 
 export default function Calendar() {
-  const { modalState } = useModalContext();
+  const { isModalOpened } = useModalContext();
   return (
     <div className='calendar-container' style={calendarContainerStyle}>
       <CalendarNavbar />
       <CalendarDays />
       {/* renders modal if true */}
-      {modalState && <Modal />}
+      {isModalOpened && <Modal />}
     </div>
   );
 }
