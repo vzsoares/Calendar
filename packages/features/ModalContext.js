@@ -5,7 +5,7 @@ import { colors } from "../features/calendarStyles";
 const modalContext = createContext();
 
 function ModalContextProvider({ children }) {
-  const { todayId } = useCalendarContext();
+  const { todayId, events } = useCalendarContext();
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [modalData, setModalData] = useState({
     date: todayId,
@@ -44,6 +44,7 @@ function ModalContextProvider({ children }) {
   function startAdding() {
     setTitle("");
     setDescription("");
+    setColor(colors.taskRed);
     setDate(new Date(modalData.date));
     setModalData({
       date: modalData.date,

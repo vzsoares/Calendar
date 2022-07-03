@@ -1,5 +1,6 @@
 import { useCalendarContext } from "../features/calendarContext";
 import { useModalContext } from "../features/ModalContext";
+
 import {
   calendarDayStyle,
   calendarDaysContainerStyle,
@@ -21,13 +22,12 @@ export default function CalendarDays() {
   const displayEvents = { ...events, ...todayEvent };
 
   return (
-    <div className='calendar-days-container' style={calendarDaysContainerStyle}>
+    <div style={calendarDaysContainerStyle}>
       {daysIds.map((id) => {
         return (
           <div
             key={id}
             onClick={() => handleClick(id)}
-            className='calendar-today'
             style={{
               ...calendarDayStyle,
               color:

@@ -130,7 +130,7 @@ function CalendarContextProvider({ children }) {
       jumpNextMonth,
       jumpPrevMonth,
     };
-  }, [todayId, daysIds, displayDate]);
+  }, [todayId, daysIds, displayDate, events, todayId]);
   return (
     <calendarContext.Provider value={contextData}>
       {children}

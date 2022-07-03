@@ -2,10 +2,12 @@ import { FaAngleRight, FaAngleLeft, FaPlus } from "react-icons/fa";
 import CalendarNavbarWeekDays from "./CalendarNavbarWeekDays";
 import { useCalendarContext } from "../features/calendarContext";
 import { useModalContext } from "../features/ModalContext";
+
 import {
   calendarNavbarStyle,
   controlButtonStyle,
 } from "../features/calendarStyles";
+
 export default function CalendarNavbar() {
   const { jumpPrevMonth, jumpNextMonth, displayDate, todayId } =
     useCalendarContext();
@@ -19,9 +21,8 @@ export default function CalendarNavbar() {
     toggleModal();
   }
   return (
-    <div className='calendar-navbar-container' style={calendarNavbarStyle}>
+    <div style={calendarNavbarStyle}>
       <div
-        className='calendar-navbar-header'
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 4fr 2fr",
@@ -29,7 +30,6 @@ export default function CalendarNavbar() {
         }}
       >
         <div
-          className='calendar-displayedMonth'
           style={{
             justifySelf: "center",
             fontSize: "1.15rem",
@@ -39,13 +39,12 @@ export default function CalendarNavbar() {
         >
           {displayDate.toDateString().slice(4, 7)} {displayDate.getFullYear()}
         </div>
-        <div className='calendar-add-control' style={{ justifySelf: "end" }}>
+        <div style={{ justifySelf: "end" }}>
           <button style={controlButtonStyle} onClick={() => handlePlusClick()}>
             <FaPlus />
           </button>
         </div>
         <div
-          className='calendar-displayedMonth-controls'
           style={{
             justifySelf: "end",
             paddingRight: "1rem",

@@ -5,6 +5,7 @@ import { colors } from "../features/calendarStyles";
 export default function ModalEditAddSection() {
   const { title, setTitle, color, setColor, description, setDescription } =
     useModalContext();
+
   return (
     <div
       style={{
@@ -25,7 +26,7 @@ function DescriptionInput({ value, setValue }) {
     <div className='content' style={{ height: "100%" }}>
       {"Description:"}
       {
-        <div className='description-input' style={{ height: "80%" }}>
+        <div style={{ height: "80%" }}>
           <input
             type='text'
             value={value}
@@ -46,10 +47,10 @@ function DescriptionInput({ value, setValue }) {
 
 function TitleInput({ value, setValue }) {
   return (
-    <div className='title'>
+    <div>
       {"Title:"}
       {
-        <div className='title-input' style={{ display: "grid" }}>
+        <div style={{ display: "grid" }}>
           <input
             type='text'
             value={value}
@@ -71,7 +72,7 @@ function TitleInput({ value, setValue }) {
 function ColorInput({ value, setValue }) {
   return (
     <>
-      <div className='color-input' style={{ justifySelf: "start" }}>
+      <div style={{ justifySelf: "start" }}>
         {"Color: "}
         <select
           value={value}

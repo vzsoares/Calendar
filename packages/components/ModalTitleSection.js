@@ -1,7 +1,8 @@
-import { useCalendarContext } from "../features/calendarContext";
 import { useModalContext } from "../features/ModalContext";
+
 export default function ModalTitleSection() {
   const { modalData, inputDate, setInputDate } = useModalContext();
+
   if (modalData.function === "new") {
     return <DateInput value={inputDate} setValue={setInputDate} />;
   } else return <div>{new Date(modalData.date).toDateString()} </div>;
@@ -9,7 +10,7 @@ export default function ModalTitleSection() {
 
 function DateInput({ value, setValue }) {
   return (
-    <div className='date-input'>
+    <div>
       <input
         onChange={(e) => setValue(e.target.value)}
         style={{
