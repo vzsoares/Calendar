@@ -1,3 +1,4 @@
+// TODO improve project styles
 export const colors = {
   backgroundBlack: "#252627",
   darkGrey: "#595B5F",

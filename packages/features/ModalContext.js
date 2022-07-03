@@ -5,6 +5,7 @@ import { colors } from "../features/calendarStyles";
 const modalContext = createContext();
 
 function ModalContextProvider({ children }) {
+  // Constants
   const { todayId, events } = useCalendarContext();
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [modalData, setModalData] = useState({
@@ -18,6 +19,7 @@ function ModalContextProvider({ children }) {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
 
+  // Functions
   function toggleModal() {
     setIsModalOpened(!isModalOpened);
   }
@@ -52,7 +54,7 @@ function ModalContextProvider({ children }) {
     });
   }
 
-  // effects
+  // Effects
   useEffect(() => {
     setInputDate(
       `${date.getFullYear()}-${

@@ -4,7 +4,6 @@ import ModalTitleSection from "./ModalTitleSection";
 import ModalViewSection from "./ModalViewSection";
 
 import { FaTimes } from "react-icons/fa";
-import { useCalendarContext } from "../features/calendarContext";
 import { useModalContext } from "../features/ModalContext";
 import {
   modalContainerStyle,
